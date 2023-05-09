@@ -2,10 +2,10 @@ from email.message import EmailMessage
 import smtplib, ssl
 
 
-sender = 'dolati.hamidreza78@gmail.com'
-password = 'bymptjhurdwfxjon'
+sender = '<enter your password>'
+password = 'you pass or api key'
 
-receiver = 'raniho9932@laserlip.com'
+receiver = '<receiver or recievers>'
 
 em = EmailMessage()
 em['From'] = sender
