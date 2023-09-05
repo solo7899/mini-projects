@@ -1,8 +1,13 @@
 #!python
 
-import qrcode
+
+
 import os
 import sys
+try:
+    import qrcode
+except:
+    os.system("pip install qrcode")
 
 link = sys.argv[1]
 def qr_generator(link:str):
