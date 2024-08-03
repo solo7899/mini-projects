@@ -8,7 +8,7 @@ def clear_terminal():
     else:
         os.system("clear")
 
-def find_words(re_word: str) -> list[str]:
+def find_words(re_word: str) -> set[str]:
         
     # url = "https://raw.githubusercontent.com/dwyl/english-words/master/words.txt"
     url = "https://www.mit.edu/~ecprice/wordlist.10000"
@@ -18,10 +18,10 @@ def find_words(re_word: str) -> list[str]:
 
     word_list: str = response.content.decode()
 
-    return re.findall(f"{re_word}", word_list, flags=re.IGNORECASE)
+    return set(re.findall(f"{re_word}", word_list, flags=re.IGNORECASE))
 
 
-def actual_words(words: list[str]) -> None:
+def actual_words(words: set[str]) -> None:
     actual_words = set() 
     try:
         for word in  words:
