@@ -1,6 +1,7 @@
-#! /usr/bin/python3
+#! /usr/bin/python3.12
 
 import requests, re, sys, os
+from tqdm import tqdm
 
 def clear_terminal():
     if sys.platform == "win32":
@@ -18,13 +19,14 @@ def find_words(re_word: str) -> set[str]:
 
     word_list: str = response.content.decode()
 
-    return set(re.findall(f"{re_word}", word_list, flags=re.IGNORECASE))
+    return list(set(re.findall(f"{re_word}", word_list, flags=re.IGNORECASE)))
 
 
-def actual_words(words: set[str]) -> None:
+def actual_words(words: list[str]) -> None:
     actual_words = set() 
+    progress_bar = tqdm(range(len(words)), position=1, leave=True)
     try:
-        for word in  words:
+        for word in words:
             if not word.isalpha():
                 continue
 
@@ -34,9 +36,10 @@ def actual_words(words: set[str]) -> None:
             
             if response.status_code == 200:
                 actual_words.add(word)
-                print(word, "valid")
-            else:
-                print(word, "not valid")
+                print(word, flush=True)
+            # else:
+            #     print(word, "not valid")
+            progress_bar.update(1)
     except KeyboardInterrupt:
         clear_terminal() 
         print("\n".join(actual_words))
