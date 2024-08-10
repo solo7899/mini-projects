@@ -36,7 +36,8 @@ def actual_words(words: list[str]) -> None:
             
             if response.status_code == 200:
                 actual_words.add(word)
-                print(word, flush=True)
+                clear_terminal()
+                print('\n'.join(actual_words))
             # else:
             #     print(word, "not valid")
             progress_bar.update(1)
@@ -44,8 +45,6 @@ def actual_words(words: list[str]) -> None:
         clear_terminal() 
         print("\n".join(actual_words))
 
-    clear_terminal()
-    print("\n".join(actual_words))
 
        
         
