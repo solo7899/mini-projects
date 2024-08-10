@@ -44,6 +44,8 @@ def actual_words(words: list[str]) -> None:
     except KeyboardInterrupt:
         clear_terminal() 
         print("\n".join(actual_words))
+    except Exception as e:
+        print("Error:", e)
 
 
        
