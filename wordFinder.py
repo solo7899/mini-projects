@@ -19,11 +19,11 @@ def find_words(re_word: str) -> set[str]:
 
     word_list: str = response.content.decode()
 
-    return list(set(re.findall(f"{re_word}", word_list, flags=re.IGNORECASE)))
+    return set(re.findall(f"{re_word}", word_list, flags=re.IGNORECASE))
 
 
 def actual_words(words: list[str]) -> None:
-    actual_words = set() 
+    actual_words = list() 
     progress_bar = tqdm(range(len(words)), position=1, leave=True)
     try:
         for word in words:
@@ -35,7 +35,7 @@ def actual_words(words: list[str]) -> None:
             response = requests.get(url)
             
             if response.status_code == 200:
-                actual_words.add(word)
+                actual_words.append(word)
                 clear_terminal()
                 print('\n'.join(actual_words))
             # else:
